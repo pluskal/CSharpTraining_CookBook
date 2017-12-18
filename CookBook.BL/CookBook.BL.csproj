@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,7 +53,7 @@
     <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\RecipDetailModel.cs" />
+    <Compile Include="Models\RecipeDetailModel.cs" />
     <Compile Include="RecipeMapper.cs" />
     <Compile Include="RecipeRepository.cs" />
   </ItemGroup>

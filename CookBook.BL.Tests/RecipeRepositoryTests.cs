@@ -1,5 +1,6 @@
 ﻿using CookBook.BL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,50 @@ namespace CookBook.BL.Tests
         [Test]
         public void InsertRecipeTest()
         {
-            var recipe = new RecipDetailModel()
+            var recipe = CreateRecipeDetailModel();
+            _recipeRepository.InsertRecipe(recipe);
+
+            var recipeFromRepository = this._recipeRepository.GetAll().FirstOrDefault(r => r.Name == recipe.Name);
+
+            Assert.IsNotNull(recipeFromRepository);
+            Assert.AreEqual(recipeFromRepository.Name,recipe.Name);
+            Assert.AreEqual(recipeFromRepository.Duration,recipe.Duration);
+            Assert.AreEqual(recipeFromRepository.Type,recipe.Type);
+        }
+
+        [Test]
+        public void InsertRecipeDetailModelTest()
+        {
+            var recipe = CreateRecipeDetailModel();
+            _recipeRepository.InsertRecipe(recipe);
+
+            GetAssertRecipeDetailModel(recipe);
+        }
+
+        [Test]
+        public void InsertTwoRecipeDetailModelsTest()
+        {
+            var recipe1 = CreateRecipeDetailModel();
+            _recipeRepository.InsertRecipe(recipe1);
+            var recipe2 = CreateRecipeDetailModel();
+            _recipeRepository.InsertRecipe(recipe2);
+
+            GetAssertRecipeDetailModel(recipe1);
+            GetAssertRecipeDetailModel(recipe2);
+        }
+
+        private void GetAssertRecipeDetailModel(RecipeDetailModel recipe)
+        {
+            var detailModel = this._recipeRepository.GetById(recipe.Id);
+
+            Assert.IsNotNull(detailModel);
+            Assert.AreEqual(detailModel, recipe);
+        }
+
+
+        private static RecipeDetailModel CreateRecipeDetailModel()
+        {
+            var recipe = new RecipeDetailModel()
             {
                 Name = "RecipeName",
                 Description = "RecipeDescription",
@@ -60,13 +104,7 @@ namespace CookBook.BL.Tests
                     }
                 }
             };
-            _recipeRepository.InsertRecipe(recipe);
-
-            var recipeFromRepository = this._recipeRepository.GetAll().FirstOrDefault(r => r.Name == recipe.Name);
-            Assert.IsNotNull(recipeFromRepository);
-            Assert.AreEqual(recipeFromRepository.Name,recipe.Name);
-            Assert.AreEqual(recipeFromRepository.Duration,recipe.Duration);
-            Assert.AreEqual(recipeFromRepository.Type,recipe.Type);
+            return recipe;
         }
     }
 }

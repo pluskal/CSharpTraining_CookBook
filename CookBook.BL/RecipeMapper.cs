@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Windows.Forms.VisualStyles;
 using CookBook.BL.Models;
 using CookBook.DAL.Entities;
 using FoodType = CookBook.BL.Models.FoodType;
@@ -19,17 +21,37 @@ namespace CookBook.BL
             };
         }
 
-        internal RecipeEntity Map(RecipDetailModel recipDetailModel)
+        public RecipeDetailModel MapDetailModel(RecipeEntity recipeEntity)
+        {
+            return new RecipeDetailModel()
+            {
+                Id = recipeEntity.Id,
+                Name = recipeEntity.Name,
+                Description = recipeEntity.Description,
+                Type = (FoodType)recipeEntity.Type,
+                Duration = recipeEntity.Duration,
+                Ingredients = recipeEntity.Ingredients.Select(ia=>new IngredientModel()
+                {
+                    Name = ia.Ingredient.Name,
+                    Description = ia.Ingredient.Description,
+                    Amount = ia.Amount,
+                    Unit = (Models.Unit) ia.Unit
+                }).ToList()
+            };
+        }
+
+        internal RecipeEntity Map(RecipeDetailModel recipeDetailModel)
         {
             var recipeEntity= new RecipeEntity
             {
-                Id = recipDetailModel.Id,
-                Name = recipDetailModel.Name,
-                Description = recipDetailModel.Description,
-                Type = (DAL.Entities.FoodType) recipDetailModel.Type,
-                Duration = recipDetailModel.Duration
+                Id = recipeDetailModel.Id,
+                Name = recipeDetailModel.Name,
+                Description = recipeDetailModel.Description,
+                Type = (DAL.Entities.FoodType) recipeDetailModel.Type,
+                Duration = recipeDetailModel.Duration,
             };
-            foreach (var ingredientModel in recipDetailModel.Ingredients)
+
+            foreach (var ingredientModel in recipeDetailModel.Ingredients)
             {
                 var ingredientAmount = new IngredientAmountEntity
                 {
