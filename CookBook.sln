@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.DAL.Tests", "CookB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.BL", "CookBook.BL\CookBook.BL.csproj", "{AEB383F4-6337-48AE-B25C-2B1A8347F20B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.BL.Tests", "CookBook.BL.Tests\CookBook.BL.Tests.csproj", "{180EBBCF-EB2E-4F8B-B468-58644D7144D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AEB383F4-6337-48AE-B25C-2B1A8347F20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEB383F4-6337-48AE-B25C-2B1A8347F20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEB383F4-6337-48AE-B25C-2B1A8347F20B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{180EBBCF-EB2E-4F8B-B468-58644D7144D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{180EBBCF-EB2E-4F8B-B468-58644D7144D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{180EBBCF-EB2E-4F8B-B468-58644D7144D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{180EBBCF-EB2E-4F8B-B468-58644D7144D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
