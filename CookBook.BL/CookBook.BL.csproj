@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\FoodType.cs" />
     <Compile Include="Models\RecipeListModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />
+    <Compile Include="Models\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\RecipDetailModel.cs" />
     <Compile Include="RecipeMapper.cs" />
