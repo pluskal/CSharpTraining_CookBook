@@ -77,6 +77,26 @@ namespace CookBook.BL.Tests
             Assert.AreEqual(detailModel, recipe);
         }
 
+        [Test]
+        public void GetIngredienceDetailModelTest()
+        {
+            var recipe = CreateRecipeDetailModel();
+            _recipeRepository.InsertRecipe(recipe);
+            var ingrediences = this._recipeRepository.GetAllIngrediences();
+            AssertIngredience(recipe, ingrediences);
+        }
+
+        private static void AssertIngredience(RecipeDetailModel recipe, IngredienceDetailModel[] ingrediences)
+        {
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                Assert.Contains(ingredient.Name, ingrediences.Select(i => i.Name).ToList());
+                Assert.Contains(ingredient.Description, ingrediences.Select(i => i.Description).ToList());
+                Assert.Contains(ingredient.Id, ingrediences.Select(i => i.Id).ToList());
+            }
+           
+        }
+
 
         private static RecipeDetailModel CreateRecipeDetailModel()
         {
@@ -86,16 +106,16 @@ namespace CookBook.BL.Tests
                 Description = "RecipeDescription",
                 Duration = new TimeSpan(0, 0, 1),
                 Type = FoodType.MainCourse,
-                Ingredients = new List<IngredientModel>()
+                Ingredients = new List<IngredienceModel>()
                 {
-                    new IngredientModel()
+                    new IngredienceModel()
                     {
                         Name = "Ingredient1Name",
                         Description = "Ingredient1Description",
                         Unit = Unit.Kg,
                         Amount = 3.14
                     },
-                    new IngredientModel()
+                    new IngredienceModel()
                     {
                         Name = "Ingredient2Name",
                         Description = "Ingredient2Description",

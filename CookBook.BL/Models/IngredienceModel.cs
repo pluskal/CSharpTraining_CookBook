@@ -1,15 +1,17 @@
-﻿using CookBook.DAL.Entities;
+﻿using System;
+using CookBook.DAL.Entities;
 
 namespace CookBook.BL.Models
 {
-    public class IngredientModel
+    public class IngredienceModel
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double Amount { get; set; }
         public Unit Unit { get; set; }
 
-        protected bool Equals(IngredientModel other)
+        protected bool Equals(IngredienceModel other)
         {
             return string.Equals(Name, other.Name) && string.Equals(Description, other.Description) && Amount.Equals(other.Amount) && Unit == other.Unit;
         }
@@ -19,7 +21,7 @@ namespace CookBook.BL.Models
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((IngredientModel) obj);
+            return Equals((IngredienceModel) obj);
         }
 
         public override int GetHashCode()

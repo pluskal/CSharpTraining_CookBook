@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO.MemoryMappedFiles;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CookBook.BL.Models;
 using CookBook.DAL;
 
@@ -26,14 +22,15 @@ namespace CookBook.BL
                 return dbx.Recipes.Select(_mapper.Map).ToArray();
             }
         }
+
         public RecipeDetailModel GetById(Guid id)
         {
             using (var dbx = new CookBookDbContext())
             {
                 return _mapper.MapDetailModel(
                     dbx.Recipes.Include(
-                        r=>r.Ingredients.Select(i=>i.Ingredient)
-                        ).FirstOrDefault(r => r.Id == id));
+                        r => r.Ingredients.Select(i => i.Ingredient)
+                    ).FirstOrDefault(r => r.Id == id));
             }
         }
 
@@ -51,6 +48,14 @@ namespace CookBook.BL
             using (var dbx = new CookBookDbContext())
             {
                 dbx.TruncateTables();
+            }
+        }
+
+        public IngredienceDetailModel[] GetAllIngrediences()
+        {
+            using (var dbx = new CookBookDbContext())
+            {
+                return dbx.Ingredients.Select(_mapper.Map).ToArray();
             }
         }
     }
