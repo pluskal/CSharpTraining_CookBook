@@ -1,0 +1,44 @@
+<UserControl x:Class="CookBook.App.Views.RecipeListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:CookBook.App.ViewModels"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d"
+             DataContext="{Binding Source={StaticResource ViewModelLocator},Path=RecipeListViewModel}"
+             d:DataContext="{d:DesignInstance viewModels:RecipeListViewModel,IsDesignTimeCreatable=false}"
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ListBox x:Name="RecipesListBox"  Grid.Row="1" ItemsSource="{Binding Recipes}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SelectRecipeCommand}"
+                                        CommandParameter="{Binding ElementName=RecipesListBox, Path=SelectedItem }" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock>
+                            Duration: 
+                            <Run 
+                                FontWeight="Bold" 
+                                Text="{
+                                Binding Duration, 
+                                Converter={StaticResource DurationToMinuteConverter}, 
+                                StringFormat= {}{0:F2}
+                                }" /> minut.
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
