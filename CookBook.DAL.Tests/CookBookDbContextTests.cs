@@ -16,6 +16,12 @@ namespace CookBook.DAL.Tests
         public CookBookDbContext DbContext { get; set; }
 
         [Test]
+        public void _GetAllRecipes_Any()
+        {
+            Assert.IsNotEmpty(this.DbContext.Recipes.ToArray());
+        }
+
+        [Test]
         public void AddIngredienceTest()
         {
             var ingredient = new IngredientEntity

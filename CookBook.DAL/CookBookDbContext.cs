@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CookBook.DAL.Entities;
@@ -17,7 +16,7 @@ namespace CookBook.DAL
 
         public CookBookDbContext():base("CookBookContext")
         {
-            Database.SetInitializer<CookBookDbContext>(new DropCreateDatabaseIfModelChanges<CookBookDbContext>());
+            Database.SetInitializer<CookBookDbContext>(new CookBookDbInitializer());
         }
         /// <summary>
         /// Todo rewrite to proper truncation...
@@ -40,16 +39,7 @@ namespace CookBook.DAL
                 .WillCascadeOnDelete(true);
             
         }
-    }
-    public static class DbContextExtensions
-    {
-        public static void Clear<T>(this IDbSet<T> dbSet, DbContext dbContext) where T : class
-        {
-            foreach (var item in dbSet.ToArray())
-            {
-                dbSet.Remove(item);
-            }
-            dbContext.SaveChanges();
-        }
+
+
     }
 }
