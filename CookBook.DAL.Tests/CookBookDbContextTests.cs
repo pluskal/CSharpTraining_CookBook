@@ -22,6 +22,12 @@ namespace CookBook.DAL.Tests
         }
 
         [Test]
+        public void _GetAllIngredients_Any()
+        {
+            Assert.IsNotEmpty(this.DbContext.Ingredients.ToArray());
+        }
+
+        [Test]
         public void AddIngredienceTest()
         {
             var ingredient = new IngredientEntity
