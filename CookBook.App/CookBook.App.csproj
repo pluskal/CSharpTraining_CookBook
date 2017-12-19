@@ -80,6 +80,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\RecipeDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RecipeListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,8 +97,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\DurationToMinuteConverter.cs" />
+    <Compile Include="ViewModels\RecipeDetailViewModel.cs" />
+    <Compile Include="ViewModels\UpdatedRecipeMessage.cs" />
     <Compile Include="Views\RecepiesUc.xaml.cs">
       <DependentUpon>RecepiesUc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipeDetailView.xaml.cs">
+      <DependentUpon>RecipeDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipeListView.xaml.cs">
       <DependentUpon>RecipeListView.xaml</DependentUpon>

@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ListBox x:Name="RecipesListBox"  Grid.Row="1" ItemsSource="{Binding Recipes}">
+        <ListBox x:Name="RecipesListBox" Grid.Row="1" ItemsSource="{Binding Recipes}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SelectRecipeCommand}"

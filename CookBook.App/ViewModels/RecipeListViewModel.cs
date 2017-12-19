@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,16 +17,49 @@ namespace CookBook.App.ViewModels
 {
     public class RecipeListViewModel : ViewModelBase
     {
+        private ObservableCollection<RecipeListModel> _recipes;
+
         public RecipeListViewModel(RecipeRepository recipeRepository)
         {
             RecipeRepository = recipeRepository;
             if (!this.IsInDesignMode)
             {
-                this.Recipes = this.RecipeRepository.GetAll();
+                this.Recipes = new ObservableCollection<RecipeListModel>();
+                OnLoad().ConfigureAwait(false);
             }
+            this.MessengerInstance.Register<UpdatedRecipeMessage>(this,UpdateRecipesList);
         }
 
-        public RecipeListModel[] Recipes { get; set; }
+        private async Task OnLoad()
+        {
+            await Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                this.Recipes = new ObservableCollection<RecipeListModel>(this.RecipeRepository.GetAll());
+            });
+        }
+
+
+        private void UpdateRecipesList(UpdatedRecipeMessage recipeMessage)
+        {
+            this.Recipes.Add(new RecipeListModel()
+            {
+                Id = recipeMessage.Detail.Id,
+                Name = recipeMessage.Detail.Name,
+                Duration = recipeMessage.Detail.Duration,
+                Type = recipeMessage.Detail.Type,
+            });
+        }
+
+        public ObservableCollection<RecipeListModel> Recipes
+        {
+            get { return _recipes; }
+            set
+            {
+                _recipes = value;
+                this.RaisePropertyChanged();
+            }
+        }
 
         public RecipeRepository RecipeRepository { get; }
 

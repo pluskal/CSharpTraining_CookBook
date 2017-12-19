@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\NewRecipeMessage.cs" />
     <Compile Include="Messages\SelectedRecipeMessage.cs" />
+    <Compile Include="Messages\UpdatedRecipeMessage.cs" />
     <Compile Include="Models\IngredienceDetailModel.cs" />
     <Compile Include="Models\FoodType.cs" />
     <Compile Include="Models\RecipeListModel.cs" />

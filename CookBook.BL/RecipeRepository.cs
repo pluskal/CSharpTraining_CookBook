@@ -58,5 +58,16 @@ namespace CookBook.BL
                 return dbx.Ingredients.Select(_mapper.Map).ToArray();
             }
         }
+
+        public void InsertOrUpdateRecipe(RecipeDetailModel detail)
+        {
+            using (var dbx = new CookBookDbContext())
+            {
+                var state = detail.Id == Guid.Empty ? 
+                    EntityState.Added : EntityState.Modified;
+                dbx.Entry(this._mapper.Map(detail)).State = state;
+                dbx.SaveChanges();
+            }
+        }
     }
 }

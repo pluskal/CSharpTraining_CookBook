@@ -15,5 +15,7 @@ namespace CookBook.App
 
         public MainViewModel MainViewModel => new MainViewModel();
         public RecipeListViewModel RecipeListViewModel => new RecipeListViewModel(_recipeRepository);
+
+        public RecipeDetailViewModel RecipeDetailViewModel => new RecipeDetailViewModel(_recipeRepository);
     }
 }
